@@ -1,99 +1,88 @@
-# Proyecto
+# Análisis de resultados académicos de estudiantes
 
-## Análisis Interactivo de Datos con Streamlit
+## Descripción del proyecto
 
-**Objetivos:** 
-- Realizar el Análisis Exploratorio de Datos (EDA) de un conjunto de datos utilizando **Pandas**.
-- Desarrollar una aplicación interactiva en **Streamlit** que cargue y visualice un conjunto de datos estándar, aplicando conceptos de manipulación de datos con **Pandas** e integración de *widgets* interactivos.
+Este proyecto realiza un análisis exploratorio de datos sobre los resultados académicos de estudiantes.
+
+El objetivo es identificar patrones relacionados con el rendimiento académico considerando variables como género, edad y nivel educativo.
+
+Para el desarrollo del proyecto se utilizaron Python, Pandas y Streamlit.
 
 ## Dataset
 
-Utilizaremos un *dataset* con un mínimo de 60k registros y 10 variables.
+El análisis utiliza datos de estudiantes que contienen información académica y demográfica.
 
-Debes buscar preferentemente en sitios de 'Datos Abiertos' o en la plataformas de [Kaggle](https://www.kaggle.com/) o [Hugging Face](https://huggingface.co/). 
+Entre las principales variables analizadas se encuentran:
 
+- Género
+- Grupo de edad
+- Nivel educativo
+- Créditos estudiados
+- Número de intentos previos
+- Resultado académico final
 
-## Actividades Requeridas del Proyecto
+Los posibles resultados finales son:
 
-El proyecto se dividirá en dos fases:
+- Pass
+- Fail
+- Withdrawn
+- Distinction
 
-La primera fase realizada en el archivo `notebooks/practice.ipynb` consiste en:
-- Carga y Preparación de Datos (Pandas en Jupyter Notebook).
-- Análisis Exploratorio de Datos (Pandas en Jupyter Notebook).
-- Grabación del dataframe resultante en un archivo CSV en la carpeta `/data/processed`.
+## Limpieza de datos
 
-La segunda fase realizada en el archivo `app.py` consiste en:
-- Carga del archivo resultante de la fase anterior en un DataFrame de Pandas.
-- Análisis Descriptivo Interactivo con Streamlit.
-- Visualización Dinámica con Streamlit.
-- Despliegue en la Nube: 'Streamlit Community Cloud'.
+Durante el análisis se revisaron los tipos de datos y los valores nulos.
 
-### Primera Fase
+La variable `imd_band` contenía 1,111 valores nulos, los cuales fueron tratados durante el proceso de limpieza.
 
-En el archivo `notebooks/practice.ipynb`: 
+El dataset limpio fue guardado en:
 
-1. **Dataset**: Graba el dataset elegido a la carpeta `data/raw`.
-2. **Carga y Estructura:** Cargar el dataset alojado en el directorio `data/raw` y convertirlo en un DataFrame de Pandas.
-2. **EDA**: Realizar un Análisis Exploratorio de Datos (EDA) del DataFrame utilizando Pandas. Límpiarlo hasta obtener un nuevo dataframe.
-3. **Grabar**: Grabar el nuevo DataFrame en un archivo CSV con un nuevo nombre descriptivo en el directorio `data/processed`.
+`data/processed/student_info_clean.csv`
 
-### Segunda Fase
+## Análisis exploratorio
 
-En el archivo `app.py`:
+Se realizaron diferentes análisis para estudiar el comportamiento de los estudiantes:
 
-#### Análisis Descriptivo Interactivo (Streamlit Widgets)
-Esta fase se centra en usar los *widgets* de Streamlit para permitir al usuario explorar los datos.
+- Distribución general de resultados finales.
+- Resultados según género.
+- Resultados según nivel educativo.
+- Resultados según grupo de edad.
 
-1.  **Sidebar de Control (`st.sidebar`):**
-    * Implementar un `st.sidebar.markdown()` para el título y descripción de los filtros.
-2.  **Filtros (`st.slider`):**
-    * Crear un **slider** que permita al usuario seleccionar un rango de alguna columna del DataFrame.
-    * Rango: El rango del slider debe ir desde el mínimo hasta el máximo de la columna.
-    * Filtrar el DataFrame para incluir solo los registros cuyo valor se encuentre dentro del rango seleccionado por el usuario.
-3.  **Resumen Descriptivo:**
-    * Mostrar la mediana y el rango (Máximo - Mínimo), la media, desviación estándar y los quartiles de las columnas del DataFrame resultante después de aplicar todos los filtros.
+También se utilizaron tablas y gráficos para facilitar la interpretación de los resultados.
 
-#### Visualización Dinámica
+## Principales resultados
 
-Deberás mostrar la relación entre las variables utilizando gráficos que se actualicen automáticamente con los filtros anteriores.
+El resultado académico más frecuente fue **Pass**, con 12,361 registros (37.93%).
 
-1.  **Gráfico de Distribución del Target (`st.pyplot` o `st.plotly_chart`):**
-    * Crear un **histograma** de la variable objetivo utilizando una librería externa (como Matplotlib o Plotly).
-    * **Requisito:** El gráfico debe reflejar la distribución de los datos **después** de aplicar los filtros del usuario.
-2.  **Gráfico de Dispersión (Regresión):**
-    * Crear un gráfico de dispersión (scatter plot) que muestre la relación entre dos columnas del DataFrame.
-    * **Requisito:** Este gráfico también debe actualizarse con los datos filtrados y ser lo suficientemente informativo (ej. incluir etiquetas y un título).
-3.  **Opcional - Mapa Geográfico** (Streamlit Nativo o Plotly):
-    * Si tu Dataset contiene valores de longitud y latitud utiliza la función nativa de Streamlit (st.map()) o un gráfico de dispersión de Plotly con st.plotly_chart() para mapear los valores de algunas columnas.
-    * Requisito: El mapa debe mostrar la distribución geográfica de los valores filtrados por el usuario.
+Los demás resultados fueron:
 
-#### Despliegue en la Nube
+- Withdrawn: 10,156 (31.16%)
+- Fail: 7,052 (21.64%)
+- Distinction: 3,024 (9.28%)
 
-Deberás preparar tu proyecto para el despliegue.
+El análisis también permitió observar diferencias en los resultados según el nivel educativo y el grupo de edad.
 
-1.  **Git/GitHub:** Crear un **repositorio público** en GitHub a partir de este template.
+## Aplicación interactiva
 
-2.  **Estructura de Carpeta:**
-    * `app.py` (código de Streamlit).
-    * `notebooks/practice.ipynb` en este archivo puedes realizar un análisis previo del dataset propuesto
-    * `requirements.txt` (listado de dependencias: `streamlit`, `pandas`, `scikit-learn`, `matplotlib` o `plotly`).
+Se desarrolló una aplicación utilizando **Streamlit** para explorar los resultados de forma interactiva.
 
-3.  **Despliegue:** Desplegar la aplicación final utilizando **Streamlit Community Cloud** (share.streamlit.io).
+La aplicación incluye:
 
-## Entrega
+- Información general del dataset.
+- Vista previa de los datos.
+- Tablas y gráficos.
+- Filtro por módulo.
+- Filtro por género.
+- Filtro por grupo de edad.
+- Filtro por nivel educativo.
 
-Deberás entregar:
-- el **enlace al repositorio de GitHub**.
-- el **enlace a la aplicación desplegada**
+## Estructura del proyecto
 
-## Cómo ejecutar este proyecto en tu propio ordenador?
-1. Instala las dependencias desdde el archivo `requirements.txt`
+- `data/raw/`: datos originales.
+- `data/processed/`: datos procesados.
+- `notebooks/`: análisis exploratorio en Jupyter Notebook.
+- `app.py`: aplicación desarrollada con Streamlit.
+- `requirements.txt`: dependencias necesarias para ejecutar el proyecto.
 
-```bash
-$ pip install -r requirements.txt
-```
-2. Ejecuta el archivo `app.py`
+## Autores
 
-```bash
-$ streamlit run app.py
-```
+Carlos y Patricia
