@@ -85,4 +85,11 @@ La aplicación incluye:
 
 ## Autores
 
+### Aplicación publicada
+
+La aplicación se encuentra disponible en Streamlit:
+
+https://carlos-y-patricia-js9xlrwrirkupcbtbbasnd.streamlit.app/
+
+
 Carlos y Patricia
